@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_codigo5_pockedex/widgets/item_type_widget.dart';
+import 'package:flutter_codigo5_pockedex/models/pokemon_model.dart';
+import 'package:flutter_codigo5_pockedex/ui/general/colors.dart';
+
+import 'item_type_widget.dart';
 
 class ItemGridWidget extends StatelessWidget {
-  String name, imageUrl;
-  List<String> type;
-  ItemGridWidget(
-      {Key? key,
-      required this.name,
-      required this.imageUrl,
-      required this.type})
-      : super(key: key);
+  //String name, imageUrl;
+  //List<String> type;
+  PokemonModel pokemon;
+
+  ItemGridWidget({
+    Key? key,
+    //required this.name,
+    //required this.imageUrl,
+    // required this.type,
+    required this.pokemon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF4ACFB0),
-        borderRadius: BorderRadius.circular(12),
+        color: colorPokemon[pokemon.type[0]],
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Stack(
         children: [
           Positioned(
-            bottom: -14,
+            bottom: -25,
             right: -14,
             child: Image.asset(
               'assets/images/pokeball.png',
@@ -33,7 +39,7 @@ class ItemGridWidget extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: Image.network(imageUrl, width: 100),
+            child: Image.network(pokemon.img),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -43,17 +49,21 @@ class ItemGridWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          pokemon.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: const TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white),
+                        ),
+                      ),
                     ),
                     Text(
-                      "#001",
+                      "#${pokemon.id}",
                       style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
@@ -64,7 +74,7 @@ class ItemGridWidget extends StatelessWidget {
                 Expanded(child: Container()),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: type
+                  children: pokemon.type
                       .map<Widget>((item) => ItemTypeWidget(type: item))
                       .toList(),
                 ),

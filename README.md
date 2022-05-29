@@ -1,6 +1,11 @@
 # flutter_codigo5_pockedex
 
-A new Flutter project.
+Flutter App: Http Get resquest fron json
+
+# Screen Shoot:
+
+![Screenshot-pokedex-homepage](/assets/images/Pokedex-homepage.png)
+
 
 ## Getting Started
 

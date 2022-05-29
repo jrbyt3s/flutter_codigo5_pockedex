@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_codigo5_pockedex/models/pokemon_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../widgets/item_grid_widget.dart';
+import '../ui/widgets/item_grid_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -64,25 +64,27 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   "Pockedex",
                   style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 30),
                 GridView.count(
-                  physics: ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 1.4,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 1.25,
                   children: pokemonModelList
                       .map<Widget>(
                         (e) => ItemGridWidget(
-                          name: e.name,
-                          imageUrl: e.img,
-                          type: e.type,
+                          //name: e.name,
+                          //imageUrl: e.img,
+                          //type: e.type,
+                          pokemon: e,
                         ),
                       )
                       .toList(),
