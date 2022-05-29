@@ -1,90 +1,96 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_codigo5_pockedex/models/pokemon_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/pokemon_model.dart';
 import '../ui/widgets/item_grid_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List pockemonList = [];
+  List pokemonList = [];
   List<PokemonModel> pokemonModelList = [];
 
   @override
-  void initState() {
-    // TODO: implement initState
+  initState() {
     super.initState();
-    getDataPockemon();
+    getDataPokemon();
   }
 
-  getDataPockemon() async {
-    //https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json
+  getDataPokemon() async {
     Uri _uri = Uri.parse(
         "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json");
     http.Response response = await http.get(_uri);
-    //print(response.statusCode);
-    //print(response.body); //String
-
-    //Primero hay que identificar el tipo de objeto con que responde el backend
-    //El backend
-    Map<String, dynamic> myMap =
-        json.decode(response.body); // convierte el texto json en mapa.
-    //Poblamos la lista con la lista de mapas pockemon.
-    pockemonList = myMap["pokemon"];
+    Map<String, dynamic> myMap = json.decode(response.body);
+    pokemonList = myMap["pokemon"];
     pokemonModelList =
-        pockemonList.map(((e) => PokemonModel.fromJson(e))).toList();
+        pokemonList.map((e) => PokemonModel.fromJson(e)).toList();
     setState(() {});
-    //print(myMap);
-    // print("=================== \n");
-    // print(myMap["pokemon"][0]);
-    // print("=================== \n");
-    // print("name: " + myMap["pokemon"][0]["name"]);
-    // print("Nextevolucion name: " + myMap["pokemon"][0]["next_evolution"][0]["name"]);
+    // myMap["pokemon"].forEach((mandarina){
+    //   print(mandarina['name']);
+    // });
 
-/*
-    //Metodo para iterar el mapa y trael los nombres:
-    myMap["pockemon"].forEach((itemMap) {
-      print(itemMap['name']);
-    });
- */
+    // pokemonList.forEach((element) {
+    //   print(element["name"]);
+    // });
+
+    // for(var item in myMap["pokemon"]){
+    //   print(item["name"]);
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("PokedexApp"),
+      // ),
+      // body: ListView.builder(
+      //   itemCount: pokemonList.length,
+      //   itemBuilder: (BuildContext context, int index){
+      //     return ListTile(
+      //       leading: CircleAvatar(
+      //         backgroundImage: NetworkImage(pokemonList[index]["img"]),
+      //       ),
+      //       title: Text(pokemonList[index]["name"]),
+      //     );
+      //   },
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Pockedex",
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  "Pokedex",
                   style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(
+                  height: 30.0,
+                ),
                 GridView.count(
                   physics: const ScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 2,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  childAspectRatio: 1.25,
+                  childAspectRatio: 1.35,
                   children: pokemonModelList
                       .map<Widget>(
-                        (e) => ItemGridWidget(
-                          //name: e.name,
-                          //imageUrl: e.img,
-                          //type: e.type,
-                          pokemon: e,
+                        (pokemon) => ItemGridWidget(
+                          // name: pokemon.name,
+                          // image: pokemon.img,
+                          // type: pokemon.type,
+                          pokemon: pokemon,
                         ),
                       )
                       .toList(),

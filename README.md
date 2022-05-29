@@ -5,7 +5,7 @@ Flutter App: Http Get resquest fron json
 # Screen Shoot:
 
 ![Screenshot-pokedex-homepage](/assets/images/Pokedex-homepage.png)
-
+![Screenshot-pokedex-homepage](/assets/images/Pokedex-detailpage.png)
 
 ## Getting Started
 

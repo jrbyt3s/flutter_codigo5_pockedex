@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/pokemon_model.dart';
+import '../ui/general/colors.dart';
 import '../ui/widgets/item_data_pokemon_widget.dart';
 import '../ui/widgets/item_type_widget.dart';
 
@@ -8,8 +9,6 @@ class PokemonDetailPage extends StatelessWidget {
   PokemonDetailPage({
     required this.pokemon,
   });
-
-  get colorPokemon => null;
 
   @override
   Widget build(BuildContext context) {

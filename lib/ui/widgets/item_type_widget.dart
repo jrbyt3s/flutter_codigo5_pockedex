@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 
 class ItemTypeWidget extends StatelessWidget {
   String type;
-  ItemTypeWidget({Key? key, required this.type}) : super(key: key);
+  ItemTypeWidget({required this.type});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      //alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2.0),
-      margin: EdgeInsets.only(bottom: 4.0),
+      margin: const EdgeInsets.only(bottom: 6.0, right: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.30),
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white.withOpacity(0.27),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -24,7 +23,8 @@ class ItemTypeWidget extends StatelessWidget {
       child: Text(
         type,
         style: TextStyle(
-            fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.white),
+          color: Colors.white,
+        ),
       ),
     );
   }
