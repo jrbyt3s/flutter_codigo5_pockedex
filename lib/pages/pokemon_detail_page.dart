@@ -47,12 +47,17 @@ class PokemonDetailPage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          pokemon.name,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 36.0,
-                            fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: 250,
+                          child: Text(
+                            pokemon.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 36.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Row(
@@ -101,6 +106,7 @@ class PokemonDetailPage extends StatelessWidget {
                         padding: const EdgeInsets.all(22.0),
                         child: Column(
                           children: [
+                            const SizedBox(height: 16),
                             const Text(
                               "About Pokemon",
                               style: TextStyle(
@@ -127,6 +133,44 @@ class PokemonDetailPage extends StatelessWidget {
                               title: "Candy",
                               data: pokemon.candy,
                             ),
+                            //Type:
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Row(
+                                children: [
+                                  Text("Type: "),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: pokemon.type
+                                            .map(
+                                              (e) => Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                child: Chip(
+                                                  label: Text(e),
+                                                  elevation: 2,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10.0),
+                                                  backgroundColor:
+                                                      colorPokemon[e] ??
+                                                          Colors.white38,
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            //Multipliers
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 4.0),
                               child: Row(
@@ -187,6 +231,77 @@ class PokemonDetailPage extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            //Pre Evolucion:
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Row(
+                                children: [
+                                  Text("Pre Evolution: "),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: pokemon.prevEvolution!
+                                            .map(
+                                              (e) => Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                child: Chip(
+                                                  label: Text(e.name),
+                                                  elevation: 2,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10.0),
+                                                  backgroundColor:
+                                                      Colors.white38,
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            //Next evolution:
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Row(
+                                children: [
+                                  Text("Next Evolution: "),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      physics: BouncingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: pokemon.nextEvolution!
+                                            .map(
+                                              (e) => Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                child: Chip(
+                                                  label: Text(e.name),
+                                                  elevation: 2,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10.0),
+                                                  backgroundColor:
+                                                      Colors.white38,
+                                                ),
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -197,7 +312,7 @@ class PokemonDetailPage extends StatelessWidget {
                           alignment: Alignment.topCenter,
                           child: Image.network(
                             pokemon.img,
-                            height: 140.0,
+                            height: 160.0,
                             fit: BoxFit.cover,
                           ),
                         ),

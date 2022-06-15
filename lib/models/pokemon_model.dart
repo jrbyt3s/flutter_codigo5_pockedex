@@ -15,7 +15,8 @@ class PokemonModel {
     required this.spawnTime,
     this.multipliers,
     this.weaknesses,
-    //required this.nextEvolution,
+    this.nextEvolution,
+    this.prevEvolution,
   });
 
   int id;
@@ -33,7 +34,8 @@ class PokemonModel {
   String spawnTime;
   List<double>? multipliers;
   List<String>? weaknesses;
-  //List<NextEvolution> nextEvolution;
+  List<Evolution>? nextEvolution;
+  List<Evolution>? prevEvolution;
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
         id: json["id"],
@@ -52,7 +54,10 @@ class PokemonModel {
         multipliers: List<double>.from(
             (json["multipliers"] ?? []).map((x) => x.toDouble())),
         weaknesses: List<String>.from((json["weaknesses"] ?? []).map((x) => x)),
-        //nextEvolution: List<NextEvolution>.from(json["next_evolution"].map((x) => NextEvolution.fromJson(x))),
+        nextEvolution: List<Evolution>.from(
+            (json["next_evolution"] ?? []).map((x) => Evolution.fromJson(x))),
+        prevEvolution: List<Evolution>.from(
+            (json["prev_evolution"] ?? []).map((x) => Evolution.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -71,12 +76,15 @@ class PokemonModel {
         "spawn_time": spawnTime,
         "multipliers": List<dynamic>.from((multipliers ?? []).map((x) => x)),
         "weaknesses": List<dynamic>.from((weaknesses ?? []).map((x) => x)),
-        //"next_evolution": List<dynamic>.from(nextEvolution.map((x) => x.toJson())),
+        "next_evolution":
+            List<dynamic>.from((nextEvolution ?? []).map((x) => x.toJson())),
+        "prev_evolution":
+            List<dynamic>.from((prevEvolution ?? []).map((x) => x.toJson())),
       };
 }
 
-class NextEvolution {
-  NextEvolution({
+class Evolution {
+  Evolution({
     required this.num,
     required this.name,
   });
@@ -84,7 +92,7 @@ class NextEvolution {
   String num;
   String name;
 
-  factory NextEvolution.fromJson(Map<String, dynamic> json) => NextEvolution(
+  factory Evolution.fromJson(Map<String, dynamic> json) => Evolution(
         num: json["num"],
         name: json["name"],
       );

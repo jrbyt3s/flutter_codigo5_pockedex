@@ -9,4 +9,5 @@ Map<String, Color> colorPokemon = {
   "Normal": Color.fromARGB(255, 50, 230, 215),
   "Poison": Color.fromARGB(255, 246, 112, 239),
   "Ground": Color.fromARGB(255, 183, 128, 121),
+  "Psychic": Color.fromARGB(255, 244, 174, 68),
 };
